@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h1>Movie Detail</h1>
+
+<div class="card mb-3" style="max-width: 1040px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{movie.movie_image.url}}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{movie.movie_name}}</h5>
+        <p class="card-text">{{movie.movie_detail}}</p>
+        <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if user.is_authenticated %}
+{% if comment %}
+<div class="vstack gap-3">
+  <h2>Comments</h2>
+  {% for comment in comment %}
+  <div class="bg-light border">{{comment.comments}}</div>
+  {% endfor %}
+</div>
+{% endif %}
+<form action="" class="mt-2" method="post">
+  <h2>Comment here:</h2>
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Enter Your Comment</label>
+    <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <button class="btn btn-info">Submit</button>
+</form>
+{% else %}
+<h3>Login to comment </h3>
+
+
+{% endif %}
+{% endblock content %}

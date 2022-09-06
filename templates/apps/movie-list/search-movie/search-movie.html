@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<div class="mt-2 row row-cols-1 row-cols-md-3 g-4">
+    {% for movie in movies %}
+    <div class="col">
+        <div class="card h-100 ">
+            <div class="ratio ratio-1x1">
+                <img src="{{movie.movie_image.url}}" class="card-img-top " alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{movie.movie_name}}</h5>
+                <p class="card-text">{{movie.movie_detail}}</p>
+                <a href="{% url 'movie-detail' movie.id %}" class="btn btn-primary">{{movie.movie_name}} Detail</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
